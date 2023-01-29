@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+
+    <!-- bootstrap styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- my custom styles -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- my javascript -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="modal fade" id="add-new-product-modal" tabindex="-1" aria-labelledby="add-new-product-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="add-new-product-modal-label">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="product-id" class="form-label">Product Id</label>
+                        <input type="number" class="form-control" id="product-id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="product-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-price" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="product-price">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-image" class="form-label">Product Image</label>
+                        <input type="file" class="form-control" id="product-image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-description" class="form-label">Product Description</label>
+                        <input type="text" class="form-control" id="product-description">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="update-product-modal" tabindex="-1" aria-labelledby="update-product-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="update-product-modal-label">Update Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="product-id" class="form-label">Product Id</label>
+                        <input type="number" class="form-control" id="product-id-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="product-name-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-price" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="product-price-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-image" class="form-label">Product Image</label>
+                        <input type="file" class="form-control" id="product-image-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-description" class="form-label">Product Description</label>
+                        <input type="text" class="form-control" id="product-description-update">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateProduct()" data-bs-dismiss="modal">Update Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <h1 class="header">Products Management System</h1>
+
+        <button type="button" class="btn btn-primary btn-lg add-new-product-btn" data-bs-toggle="modal" data-bs-target="#add-new-product-modal">Add New Product</button>
+
+        <h4 class="products-header">Products</h4>
+
+        <div id="products-row" class="row">
+        </div>
+
+    </div>
+
+    <!-- bootstrap javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

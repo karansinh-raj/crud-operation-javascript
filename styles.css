@@ -1,0 +1,61 @@
+/* colors variables */
+:root{
+    --primaryColor: #0067c0;
+    --primaryHoverColor: #0066c0da;
+
+    --backgroundColor: #f3f3f3;
+
+    --cardBackgroundColor: #f9f9f9;
+    --cardSecondaryBackgroundColor: #f3f9fbb0;
+    --cardHoverBackgroundColor: #f9f9f99c;
+    --shadowColor: #c3c4c7;
+    --textColor: #000000;
+    --secondaryTextColor: #aaaaaa;
+}
+
+/* all elements */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* body style */
+body{
+    height: 100vh;
+    width: 100%;
+    font-family: Helvetica, sans-serif;
+    background-color: var(--backgroundColor);
+}
+.add-new-product-btn{
+    margin-top: 1rem;
+}
+.products-header{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    margin-left: 0.2rem;
+}
+.card{
+    width: 20rem;
+    height: auto;
+    padding: 0.5rem;
+    display: flex;
+}
+.card-image{
+    width: 80%;
+    height: 15rem;
+    align-self: center;
+}
+.card-title{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.card-price{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--secondaryTextColor);
+}
+.card-description{
+    font-size: 0.8rem;
+    font-weight: lighter;
+}

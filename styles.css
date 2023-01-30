@@ -1,3 +1,6 @@
+/* google Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 /* colors variables */
 :root{
     --primaryColor: #0067c0;
@@ -24,7 +27,7 @@
 body{
     height: 100vh;
     width: 100%;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: var(--backgroundColor);
 }
 .add-new-product-btn{
@@ -58,4 +61,13 @@ body{
 .card-description{
     font-size: 0.8rem;
     font-weight: lighter;
+}
+.search-product-text{
+    width: fit-content;
+    padding-right: 10rem;
+}
+.filter-select-input{
+    display: inline-block;
+    width: fit-content;
+    padding-right: 5rem;
 }

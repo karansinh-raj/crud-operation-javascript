@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles.css">
     <!-- my javascript -->
     <script src="script.js" defer></script>
+
 </head>
 <body>
     <div class="modal fade" id="add-new-product-modal" tabindex="-1" aria-labelledby="add-new-product-modal-label" aria-hidden="true">
@@ -22,30 +23,37 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="product-id" class="form-label">Product Id</label>
-                        <input type="number" class="form-control" id="product-id">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-name" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="product-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-price" class="form-label">Product Price</label>
-                        <input type="number" class="form-control" id="product-price">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-image" class="form-label">Product Image</label>
-                        <input type="file" class="form-control" id="product-image">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-description" class="form-label">Product Description</label>
-                        <input type="text" class="form-control" id="product-description">
-                    </div>
+                    <form id="add-new-product-form">
+                        <div class="mb-3">
+                            <label for="product-id" class="form-label">Product Id</label>
+                            <input type="number" class="form-control" id="product-id" required>
+                            <div class="invalid-feedback" id="product-id-error-msg">Please provide a valid product id!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-name" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="product-name" required>
+                            <div class="invalid-feedback" id="product-name-error-msg">Please provide a valid product name!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-price" class="form-label">Product Price</label>
+                            <input type="number" class="form-control" id="product-price" required>
+                            <div class="invalid-feedback" id="product-price-error-msg">Please provide a valid product price!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-image" class="form-label">Product Image</label>
+                            <input type="file" class="form-control" id="product-image" required>
+                            <div class="invalid-feedback" id="product-image-error-msg">Please provide a valid product image!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-description" class="form-label">Product Description</label>
+                            <input type="text" class="form-control" id="product-description" required>
+                            <div class="invalid-feedback" id="product-description-error-msg">Please provide a valid product description!</div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="addProduct()" data-bs-dismiss="modal">Add Product</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
                 </div>
             </div>
         </div>
@@ -59,26 +67,33 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="product-id" class="form-label">Product Id</label>
-                        <input type="number" class="form-control" id="product-id-update">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-name" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="product-name-update">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-price" class="form-label">Product Price</label>
-                        <input type="number" class="form-control" id="product-price-update">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-image" class="form-label">Product Image</label>
-                        <input type="file" class="form-control" id="product-image-update">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product-description" class="form-label">Product Description</label>
-                        <input type="text" class="form-control" id="product-description-update">
-                    </div>
+                    <form id="update-product-form">
+                        <div class="mb-3">
+                            <label for="product-id" class="form-label">Product Id</label>
+                            <input type="number" class="form-control" id="product-id-update" required readonly>
+                            <div class="invalid-feedback" id="product-id-update-error-msg">Please provide a valid product id!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-name" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="product-name-update" required>
+                            <div class="invalid-feedback" id="product-name-update-error-msg">Please provide a valid product name!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-price" class="form-label">Product Price</label>
+                            <input type="number" class="form-control" id="product-price-update" required>
+                            <div class="invalid-feedback" id="product-price-update-error-msg">Please provide a valid product price!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-image" class="form-label">Product Image</label>
+                            <input type="file" class="form-control" id="product-image-update">
+                            <div class="invalid-feedback" id="product-image-update-error-msg">Please provide a valid product image!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product-description" class="form-label">Product Description</label>
+                            <input type="text" class="form-control" id="product-description-update" required>
+                            <div class="invalid-feedback" id="product-description-update-error-msg">Please provide a valid product description!</div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -88,6 +103,33 @@
         </div>
     </div>
 
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast align-items-center" id="product-added-toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">Product added successfully!</div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast align-items-center" id="product-updated-toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">Product updated successfully!</div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast align-items-center" id="product-deleted-toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">Product deleted successfully!</div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    
     <div class="container-fluid">
         <h1 class="header">Products Management System</h1>
 
@@ -95,11 +137,36 @@
 
         <h4 class="products-header">Products</h4>
 
+        <div class="mb-3">
+            <input type="text" class="form-control search-product-text" id="serachProductText" placeholder="Search a product..." oninput="searchProduct(this.value)">
+        </div>
+
+        <label class="fw-bold mb-5 me-2">Sort Products By</label>
+
+        <div class="btn-group mb-1 me-2" id="sort-btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="sort-btn" id="product-id-sort-btn" value="ProductId" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="product-id-sort-btn">Product Id</label>
+          
+            <input type="radio" class="btn-check" name="sort-btn" id="product-name-sort-btn" value="ProductName" autocomplete="off">
+            <label class="btn btn-outline-primary" for="product-name-sort-btn">Product Name</label>
+          
+            <input type="radio" class="btn-check" name="sort-btn" id="product-price-sort-btn" value="Price" autocomplete="off">
+            <label class="btn btn-outline-primary" for="product-price-sort-btn">Product Price (Low to High)</label>
+
+            <input type="radio" class="btn-check" name="sort-btn" id="product-price-htl-sort-btn" value="Price-htl" autocomplete="off">
+            <label class="btn btn-outline-primary" for="product-price-htl-sort-btn">Product Price (High to Low)</label>
+        </div>
+
+        <label class="fw-bold mb-5 me-2">Filter Products By</label>
+        <select class="form-select filter-select-input" id="filter-select-input" onchange="filterProducts(this.value)"></select>
+
         <div id="products-row" class="row">
         </div>
 
     </div>
 
+    <!-- Jquery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <!-- bootstrap javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>

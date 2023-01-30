@@ -81,12 +81,12 @@ class Products{
         let productCards="";
 
         products.forEach(product =>{
-            productCards += `<div class="col-auto">
+            productCards += `<div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="card shadow-lg">
                     <img src="${product.Image}" alt="${product.ProductName}" class="card-image">
                     <div class="card-body">
                         <h5 class="card-title">${product.ProductName}</h5>
-                        <p class="card-price">Rs. ${product.Price}</p>
+                        <p class="card-price">Rs. ${Number(product.Price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
                         <p class="card-description">${product.Description}</p>
                         <div class="card-buttons">
                             <button type="button" class="btn btn-outline-secondary" onclick="passDataToModal('${encodeURIComponent(JSON.stringify(product))}')" data-bs-toggle="modal" data-bs-target="#update-product-modal">Update</button>

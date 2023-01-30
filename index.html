@@ -141,9 +141,8 @@
             <input type="text" class="form-control search-product-text" id="serachProductText" placeholder="Search a product..." oninput="searchProduct(this.value)">
         </div>
 
-        <label class="fw-bold mb-5 me-2">Sort Products By</label>
-
-        <div class="btn-group mb-1 me-2" id="sort-btn-group" role="group" aria-label="Basic radio toggle button group">
+        <label class="fw-bold me-2 mt-3">Sort Products By</label>
+        <div class="btn-group me-2" id="sort-btn-group" role="group" aria-label="Basic radio toggle button group">
             <input type="radio" class="btn-check" name="sort-btn" id="product-id-sort-btn" value="ProductId" autocomplete="off" checked>
             <label class="btn btn-outline-primary" for="product-id-sort-btn">Product Id</label>
           
@@ -157,10 +156,10 @@
             <label class="btn btn-outline-primary" for="product-price-htl-sort-btn">Product Price (High to Low)</label>
         </div>
 
-        <label class="fw-bold mb-5 me-2">Filter Products By</label>
+        <label class="fw-bold me-2 mt-3">Filter Products By</label>
         <select class="form-select filter-select-input" id="filter-select-input" onchange="filterProducts(this.value)"></select>
 
-        <div id="products-row" class="row">
+        <div id="products-row" class="row g-2 mt-5">
         </div>
 
     </div>

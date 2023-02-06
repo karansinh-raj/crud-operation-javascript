@@ -20,7 +20,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="add-new-product-modal-label">Add New Product</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeAddModal()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="add-new-product-form">
@@ -52,7 +52,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeAddModal()">Close</button>
                     <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="update-product-modal-label">Update Product</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeUpdateModal()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="update-product-form">
@@ -95,7 +95,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeUpdateModal()">Close</button>
                     <button type="button" class="btn btn-primary" onclick="updateProduct()">Update Product</button>
                 </div>
             </div>

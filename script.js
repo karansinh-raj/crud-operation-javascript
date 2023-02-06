@@ -92,7 +92,7 @@ class Products{
                     <div class="card shadow-lg">
                         <img src="${product.Image}" alt="${product.ProductName}" class="card-image">
                         <div class="card-body">
-                            <p class="card-subtitle">ID: ${product.ProductId}</p>
+                            <p class="card-subtitle">Product Id: ${product.ProductId}</p>
                             <h5 class="card-title">${product.ProductName}</h5>
                             <p class="card-price">Rs. ${Number(product.Price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
                             <p class="card-description">${product.Description}</p>
@@ -250,24 +250,46 @@ async function updateProduct(){
     const productDescription = productDescriptionTextUpdate.value;
     const productImage = productImageFileUpdate.files[0];
 
+    productImageFileUpdate.setCustomValidity('');
+
     if(updateProductForm.checkValidity() === false){
         updateProductForm.classList.add('was-validated');
     }else{
         let productImageString;
         if(productImage){
-            productImageString = await convertBase64(productImage);
-        }else{
-            productImageString = null;
+            let idxDot = productImage.name.lastIndexOf(".") + 1;
+            let extFile = productImage.name.substr(idxDot, productImage.length).toLowerCase();
+
+            if(!(extFile === "jpg" || extFile === "jpeg" || extFile === "png" || extFile === "webp")){
+                productImageFileUpdate.setCustomValidity('product image is invalid');
+                productImageUpdateErrorMessage.innerText = 'product image is invalid';
+                updateProductForm.classList.add('was-validated');
+            }else{
+                productImageString = await convertBase64(productImage);
+
+                products.updateProduct(productId, productName, productPrice, productDescription, productImageString);
+                $('#update-product-modal').modal('hide');
+                const toast = new bootstrap.Toast(productUpdatedToast);
+                toast.show();
+
+                updateProductForm.reset();
+                if(updateProductForm.classList.contains('was-validated')){
+                    updateProductForm.classList.remove('was-validated');
+                }
+            }
         }
-        products.updateProduct(productId, productName, productPrice, productDescription, productImageString);
+        else{
+            productImageString = null;
 
-        $('#update-product-modal').modal('hide');
-        const toast = new bootstrap.Toast(productUpdatedToast);
-        toast.show();
+            products.updateProduct(productId, productName, productPrice, productDescription, productImageString);
+            $('#update-product-modal').modal('hide');
+            const toast = new bootstrap.Toast(productUpdatedToast);
+            toast.show();
 
-        updateProductForm.reset();
-        if(updateProductForm.classList.contains('was-validated')){
-            updateProductForm.classList.remove('was-validated');
+            updateProductForm.reset();
+            if(updateProductForm.classList.contains('was-validated')){
+                updateProductForm.classList.remove('was-validated');
+            }
         }
     }
 }
@@ -294,4 +316,16 @@ sortButtonsGroup.onclick = ()=>{
 
 function filterProducts(filterValue){
     products.filterProducts(filterValue);
+}
+
+function closeUpdateModal(){
+    if(updateProductForm.classList.contains('was-validated')){
+        updateProductForm.classList.remove('was-validated');
+    }
+}
+
+function closeAddModal(){
+    if(addNewProductForm.classList.contains('was-validated')){
+        addNewProductForm.classList.remove('was-validated');
+    }
 }

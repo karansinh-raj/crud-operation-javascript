@@ -222,11 +222,15 @@ async function addProduct(){
             };
 
             products.addProduct(newProduct);
-            $('#add-new-product-modal').modal('hide');
 
+            $('#add-new-product-modal').modal('hide');
             const toast = new bootstrap.Toast(productAddedToast);
             toast.show();
+
             addNewProductForm.reset();
+            if(addNewProductForm.classList.contains('was-validated')){
+                addNewProductForm.classList.remove('was-validated');
+            }
         }
     }
 }
@@ -260,6 +264,11 @@ async function updateProduct(){
         $('#update-product-modal').modal('hide');
         const toast = new bootstrap.Toast(productUpdatedToast);
         toast.show();
+
+        updateProductForm.reset();
+        if(updateProductForm.classList.contains('was-validated')){
+            updateProductForm.classList.remove('was-validated');
+        }
     }
 }
 

@@ -96,3 +96,15 @@ body{
     font-size: 1.5rem;
     padding-top: 1rem;
 }
+
+#product-added-toast{
+    background-color: #d1e7dd;
+}
+
+#product-updated-toast{
+    background-color: #fff3cd;
+}
+
+#product-deleted-toast{
+    background-color: #f8d7da;
+}

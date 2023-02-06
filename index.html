@@ -31,7 +31,7 @@
                         </div> -->
                         <div class="mb-3">
                             <label for="product-name" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="product-name" required>
+                            <input type="text" class="form-control" id="product-name" pattern="[a-zA-Z0-9][a-zA-Z0-9-_ ]+" required>
                             <div class="invalid-feedback" id="product-name-error-msg">Please provide a valid product name</div>
                         </div>
                         <div class="mb-3">
@@ -74,7 +74,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="product-name" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="product-name-update" required>
+                            <input type="text" class="form-control" id="product-name-update" pattern="[a-zA-Z0-9][a-zA-Z0-9-_ ]+" required>
                             <div class="invalid-feedback" id="product-name-update-error-msg">Please provide a valid product name</div>
                         </div>
                         <div class="mb-3">
@@ -96,14 +96,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateProduct()" data-bs-dismiss="modal">Update Product</button>
+                    <button type="button" class="btn btn-primary" onclick="updateProduct()">Update Product</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div class="toast align-items-center bg-success bg-opacity-75 text-white" id="product-added-toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast align-items-center" id="product-added-toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
               <div class="toast-body">Product added successfully</div>
               <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -112,7 +112,7 @@
     </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div class="toast align-items-center bg-warning bg-opacity-75 text-white" id="product-updated-toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast align-items-center" id="product-updated-toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
               <div class="toast-body">Product updated successfully</div>
               <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -121,7 +121,7 @@
     </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div class="toast align-items-center bg-danger bg-opacity-75 text-white" id="product-deleted-toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast align-items-center" id="product-deleted-toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
               <div class="toast-body">Product deleted successfully</div>
               <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>

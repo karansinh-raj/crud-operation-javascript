@@ -24,11 +24,11 @@
                 </div>
                 <div class="modal-body">
                     <form id="add-new-product-form">
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="product-id" class="form-label">Product Id</label>
                             <input type="number" class="form-control" id="product-id" required>
                             <div class="invalid-feedback" id="product-id-error-msg">Please provide a valid product id</div>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="product-name" class="form-label">Product Name</label>
                             <input type="text" class="form-control" id="product-name" required>
@@ -36,12 +36,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="product-price" class="form-label">Product Price</label>
-                            <input type="number" class="form-control" id="product-price" required>
+                            <input type="number" class="form-control" step="any" min="0" id="product-price" required>
                             <div class="invalid-feedback" id="product-price-error-msg">Please provide a valid product price</div>
                         </div>
                         <div class="mb-3">
                             <label for="product-image" class="form-label">Product Image</label>
-                            <input type="file" class="form-control" id="product-image" required>
+                            <input type="file" class="form-control" accept="image/*" id="product-image" required>
                             <div class="invalid-feedback" id="product-image-error-msg">Please provide a valid product image</div>
                         </div>
                         <div class="mb-3">
@@ -70,8 +70,7 @@
                     <form id="update-product-form">
                         <div class="mb-3">
                             <label for="product-id" class="form-label">Product Id</label>
-                            <input type="number" class="form-control" id="product-id-update" required readonly>
-                            <div class="invalid-feedback" id="product-id-update-error-msg">Please provide a valid product id</div>
+                            <input type="text" class="form-control" id="product-id-update" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="product-name" class="form-label">Product Name</label>
@@ -80,12 +79,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="product-price" class="form-label">Product Price</label>
-                            <input type="number" class="form-control" id="product-price-update" required>
+                            <input type="number" class="form-control" step="any" min="0" id="product-price-update" required>
                             <div class="invalid-feedback" id="product-price-update-error-msg">Please provide a valid product price</div>
                         </div>
                         <div class="mb-3">
                             <label for="product-image" class="form-label">Product Image</label>
-                            <input type="file" class="form-control" id="product-image-update">
+                            <input type="file" class="form-control" accept="image/*" id="product-image-update">
                             <div class="invalid-feedback" id="product-image-update-error-msg">Please provide a valid product image</div>
                         </div>
                         <div class="mb-3">
@@ -161,10 +160,13 @@
 
         <div id="products-row" class="row g-2 mt-5">
         </div>
+        <div id="products-not-found-row" class="row g-2 mt-5 products-not-found-row">
+            <div class="col-auto">
+                <img src="images/empty-box.png" alt="no data found">
+                <h6>No products have been added yet</h6>
+            </div>
+        </div>
     </div>
-
-    <!-- Test Comment -->
-    <!-- Test Comment 2-->
 
     <!-- Jquery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>

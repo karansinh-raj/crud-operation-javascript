@@ -52,6 +52,12 @@ body{
     height: 15rem;
     align-self: center;
 }
+.card-subtitle{
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: lighter;
+    color: var(--secondaryTextColor);
+}
 .card-title{
     font-size: 1.5rem;
     font-weight: bold;
@@ -72,5 +78,21 @@ body{
 .filter-select-input{
     display: inline-block;
     width: fit-content;
+    max-width: 100%;
     padding-right: 5rem;
+}
+.products-not-found-row{
+    justify-content: center;
+    display: none;
+}
+.products-not-found-row .col-auto{
+    text-align: center;
+}
+.products-not-found-row .col-auto img{
+    height: 15rem;
+    width: 15rem;
+}
+.products-not-found-row .col-auto h6{
+    font-size: 1.5rem;
+    padding-top: 1rem;
 }

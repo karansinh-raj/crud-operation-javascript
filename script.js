@@ -1,6 +1,7 @@
 class Products{
-    constructor(productsRowElement, filterSelectInput){
+    constructor(productsRowElement, productsNotFoundRowElement, filterSelectInput){
         this.productsRowElement = productsRowElement;
+        this.productsNotFoundRowElement = productsNotFoundRowElement;
         this.filterSelectInput = filterSelectInput;
     }
 
@@ -72,31 +73,39 @@ class Products{
         this.fetchProducts();
     }
 
-    checkProductAlreadyExist(productId){
-        const productIndex = this.products.findIndex((obj => obj.ProductId === productId));
+    checkProductAlreadyExist(productName){
+        const productIndex = this.products.findIndex((obj => obj.ProductName === productName));
         return productIndex === -1 ? false : true;
     }
 
     displayProducts(products){
-        let productCards="";
+        if(products === null || products.length === 0){
+            productsNotFoundRowElement.style.display = "block";
+            productsRowElement.style.display = "none";
+        }else{
+            productsNotFoundRowElement.style.display = "none";
+            productsRowElement.style.display = "flex";
+            let productCards="";
 
-        products.forEach(product =>{
-            productCards += `<div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card shadow-lg">
-                    <img src="${product.Image}" alt="${product.ProductName}" class="card-image">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.ProductName}</h5>
-                        <p class="card-price">Rs. ${Number(product.Price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
-                        <p class="card-description">${product.Description}</p>
-                        <div class="card-buttons">
-                            <button type="button" class="btn btn-outline-secondary" onclick="passDataToModal('${encodeURIComponent(JSON.stringify(product))}')" data-bs-toggle="modal" data-bs-target="#update-product-modal">Update</button>
-                            <button type="button" class="btn btn-outline-danger" onclick="deleteProduct('${product.ProductId}')">Delete</button>
-                        </div>
-                    </div>              
-                </div>
-            </div>`;
-        });
-        this.productsRowElement.innerHTML = productCards;
+            products.forEach(product =>{
+                productCards += `<div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card shadow-lg">
+                        <img src="${product.Image}" alt="${product.ProductName}" class="card-image">
+                        <div class="card-body">
+                            <p class="card-subtitle">ID: ${product.ProductId}</p>
+                            <h5 class="card-title">${product.ProductName}</h5>
+                            <p class="card-price">Rs. ${Number(product.Price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
+                            <p class="card-description">${product.Description}</p>
+                            <div class="card-buttons">
+                                <button type="button" class="btn btn-outline-secondary" onclick="passDataToModal('${encodeURIComponent(JSON.stringify(product))}')" data-bs-toggle="modal" data-bs-target="#update-product-modal">Update</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="deleteProduct('${product.ProductId}')">Delete</button>
+                            </div>
+                        </div>              
+                    </div>
+                </div>`;
+            });
+            this.productsRowElement.innerHTML = productCards;
+        }
     }
 
     displayFilterSelectItems(products){
@@ -109,6 +118,7 @@ class Products{
 }
 
 const productsRowElement = document.getElementById("products-row");
+const productsNotFoundRowElement = document.getElementById("products-not-found-row");
 
 const productIdText = document.getElementById('product-id');
 const productNameText = document.getElementById('product-name');
@@ -147,7 +157,7 @@ const productDeletedToast = document.getElementById('product-deleted-toast');
 const sortButtonsGroup = document.getElementById('sort-btn-group')
 const filterSelectInput = document.getElementById('filter-select-input');
 
-const products = new Products(productsRowElement, filterSelectInput);
+const products = new Products(productsRowElement, productsNotFoundRowElement, filterSelectInput);
 
 window.onload = ()=>{
     products.fetchProducts();
@@ -168,23 +178,40 @@ const convertBase64 = (file) => {
     });
 };
 
+function createUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+}
+
 async function addProduct(){
-    const productId = productIdText.value;
+    // const productId = productIdText.value;
+    const productId = createUUID();
     const productName = productNameText.value;
     const productPrice = productPriceText.value;
     const productDescription = productDescriptionText.value;
     const productImage = productImageFile.files[0];
 
-    productIdText.setCustomValidity('');
+    productNameText.setCustomValidity('');
+    productImageFile.setCustomValidity('');
 
     if(addNewProductForm.checkValidity() === false){
         addNewProductForm.classList.add('was-validated');
     }else{
-        if(products.checkProductAlreadyExist(productId)){
-            productIdText.setCustomValidity('product id already exist!');
-            productIdErrorMessage.innerText = 'product id already exist!';
+        let idxDot = productImage.name.lastIndexOf(".") + 1;
+        let extFile = productImage.name.substr(idxDot, productImage.length).toLowerCase();
+
+        if(products.checkProductAlreadyExist(productName)){
+            productNameText.setCustomValidity('product name already exist');
+            productNameErrorMessage.innerText = 'product name already exist';
             addNewProductForm.classList.add('was-validated');
-        }else{
+        }else if(!(extFile === "jpg" || extFile === "jpeg" || extFile === "png" || extFile === "webp")){
+            productImageFile.setCustomValidity('product image is invalid');
+            productImageErrorMessage.innerText = 'product image is invalid';
+            addNewProductForm.classList.add('was-validated');
+        }
+        else{
             const productImageString = await convertBase64(productImage);
             let newProduct = {
                 ProductId: productId,
@@ -193,12 +220,13 @@ async function addProduct(){
                 Price: productPrice,
                 Description: productDescription
             };
-            products.addProduct(newProduct);
 
+            products.addProduct(newProduct);
             $('#add-new-product-modal').modal('hide');
 
             const toast = new bootstrap.Toast(productAddedToast);
             toast.show();
+            addNewProductForm.reset();
         }
     }
 }
@@ -230,7 +258,6 @@ async function updateProduct(){
         products.updateProduct(productId, productName, productPrice, productDescription, productImageString);
 
         $('#update-product-modal').modal('hide');
-
         const toast = new bootstrap.Toast(productUpdatedToast);
         toast.show();
     }

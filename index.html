@@ -82,9 +82,14 @@
                             <input type="number" class="form-control" step="any" min="0" id="product-price-update" required>
                             <div class="invalid-feedback" id="product-price-update-error-msg">Please provide a valid product price</div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 product-image-view-container">
                             <label for="product-image" class="form-label">Product Image</label>
-                            <input type="file" class="form-control" accept="image/*" id="product-image-update">
+                            </br>
+                            <img alt="existing image" id="product-image-view-update" class="product-image-view-update">
+                            <p class="product-image-view-name" id="product-image-view-name"></p>
+                        </div>
+                        <div class="mb-3">
+                            <input type="file" class="form-control" accept="image/*" id="product-image-update" onchange="displayImage(this)">
                             <div class="invalid-feedback" id="product-image-update-error-msg">Please provide a valid product image</div>
                         </div>
                         <div class="mb-3">
@@ -155,9 +160,11 @@
             <label class="btn btn-outline-primary" for="product-price-htl-sort-btn">Product Price (High to Low)</label>
         </div>
 
-        <label class="fw-bold me-2 mt-3">Filter Products By</label>
-        <select class="form-select filter-select-input" id="filter-select-input" onchange="filterProducts(this.value)"></select>
-
+        <div class="filter-products-container">
+            <label class="fw-bold me-2 mt-3">Filter Products By</label>
+            <select class="form-select filter-select-input" id="filter-select-input" onchange="filterProducts(this.value)"></select>
+        </div>
+        
         <div id="products-row" class="row g-2 mt-5">
         </div>
         <div id="products-not-found-row" class="row g-2 mt-5 products-not-found-row">

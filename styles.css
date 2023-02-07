@@ -48,8 +48,8 @@ body{
     display: flex;
 }
 .card-image{
-    max-width: fit-content;
     height: 15rem;
+    max-width: 100%;
     align-self: center;
 }
 .card-subtitle{
@@ -73,12 +73,15 @@ body{
 }
 .search-product-text{
     width: fit-content;
+    max-width: 100%;
     padding-right: 10rem;
+}
+.filter-products-container{
+    display: inline-block;
 }
 .filter-select-input{
     display: inline-block;
-    width: fit-content;
-    max-width: 100%;
+    max-width: fit-content;
     padding-right: 5rem;
 }
 .products-not-found-row{
@@ -107,4 +110,18 @@ body{
 
 #product-deleted-toast{
     background-color: #f8d7da;
+}
+
+.product-image-view-container{
+    width: fit-content;
+}
+
+.product-image-view-update{
+    height: 6rem;
+    width: 6rem;
+}
+.product-image-view-name{
+    padding-top: 0.5rem;
+    text-align: center;
+    color: var(--secondaryTextColor);
 }

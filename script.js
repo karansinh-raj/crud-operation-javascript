@@ -53,13 +53,14 @@ class Products{
         this.fetchProducts();
     }
 
-    updateProduct(productId, productName, productPrice, productDescription, productImageString){
+    updateProduct(productId, productName, productPrice, productDescription, productImageString, productImageName){
         const productIndex = this.products.findIndex((obj => obj.ProductId === productId));
 
         this.products[productIndex].ProductName = productName;
         this.products[productIndex].Price = productPrice;
-        if(productImageString !== null){
+        if(productImageString !== null && productImageName !== null){
             this.products[productIndex].Image = productImageString;
+            this.products[productIndex].ImageName = productImageName;
         }
         this.products[productIndex].Description = productDescription;
 
@@ -217,6 +218,7 @@ async function addProduct(){
                 ProductId: productId,
                 ProductName: productName,
                 Image: productImageString,
+                ImageName: productImage.name,
                 Price: productPrice,
                 Description: productDescription
             };
@@ -241,6 +243,8 @@ function passDataToModal(productString){
     document.getElementById('product-name-update').value = product.ProductName;
     document.getElementById('product-price-update').value = product.Price;
     document.getElementById('product-description-update').value = product.Description;
+    document.getElementById('product-image-view-update').src = product.Image;
+    document.getElementById('product-image-view-name').innerHTML = product.ImageName;
 }
 
 async function updateProduct(){
@@ -256,6 +260,8 @@ async function updateProduct(){
         updateProductForm.classList.add('was-validated');
     }else{
         let productImageString;
+        let productImageName;
+
         if(productImage){
             let idxDot = productImage.name.lastIndexOf(".") + 1;
             let extFile = productImage.name.substr(idxDot, productImage.length).toLowerCase();
@@ -266,8 +272,9 @@ async function updateProduct(){
                 updateProductForm.classList.add('was-validated');
             }else{
                 productImageString = await convertBase64(productImage);
+                productImageName = productImage.name;
 
-                products.updateProduct(productId, productName, productPrice, productDescription, productImageString);
+                products.updateProduct(productId, productName, productPrice, productDescription, productImageString, productImageName);
                 $('#update-product-modal').modal('hide');
                 const toast = new bootstrap.Toast(productUpdatedToast);
                 toast.show();
@@ -280,8 +287,9 @@ async function updateProduct(){
         }
         else{
             productImageString = null;
+            productImageName = null;
 
-            products.updateProduct(productId, productName, productPrice, productDescription, productImageString);
+            products.updateProduct(productId, productName, productPrice, productDescription, productImageString, productImageName);
             $('#update-product-modal').modal('hide');
             const toast = new bootstrap.Toast(productUpdatedToast);
             toast.show();
@@ -318,14 +326,39 @@ function filterProducts(filterValue){
     products.filterProducts(filterValue);
 }
 
+async function displayImage(item){
+    const productImage = item.files[0];
+    let productImageString;
+    let productImageName;
+
+    if(productImage){
+        let idxDot = productImage.name.lastIndexOf(".") + 1;
+        let extFile = productImage.name.substr(idxDot, productImage.length).toLowerCase();
+
+        if(!(extFile === "jpg" || extFile === "jpeg" || extFile === "png" || extFile === "webp")){
+            productImageFileUpdate.setCustomValidity('product image is invalid');
+            productImageUpdateErrorMessage.innerText = 'product image is invalid';
+            updateProductForm.classList.add('was-validated');
+        }else{
+            productImageString = await convertBase64(productImage);
+            productImageName = productImage.name;
+
+            document.getElementById('product-image-view-update').src = productImageString;
+            document.getElementById('product-image-view-name').innerHTML = productImageName;
+        }
+    }
+}
+
 function closeUpdateModal(){
     if(updateProductForm.classList.contains('was-validated')){
         updateProductForm.classList.remove('was-validated');
     }
+    updateProductForm.reset();
 }
 
 function closeAddModal(){
     if(addNewProductForm.classList.contains('was-validated')){
         addNewProductForm.classList.remove('was-validated');
     }
+    addNewProductForm.reset();
 }
